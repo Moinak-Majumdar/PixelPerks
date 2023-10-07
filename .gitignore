@@ -34,6 +34,8 @@ migrate_working_dir/
 
 .env
 *.env
+/lib/utils/message.dart
+/lib/utils/splash_screen.dart
 
 # Symbolication related
 app.*.symbols

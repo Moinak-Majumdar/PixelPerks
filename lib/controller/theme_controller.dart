@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hive/hive.dart';
+import 'package:pixelperks/hive_dark_mode.dart';
 
 abstract class AppTheme {
   static final appFont = GoogleFonts.itimTextTheme();
@@ -76,20 +78,33 @@ abstract class AppTheme {
   );
 }
 
+const _boxName = "DarkModeBox";
+const _boxId = "DmId";
+
 class DarkModeController extends GetxController {
   RxBool darkMode = true.obs;
 
   @override
-  void onInit() {
-    darkMode.value =
+  void onInit() async {
+    final box = await Hive.openBox<HiveDarkMode>(_boxName);
+    final system =
         SchedulerBinding.instance.platformDispatcher.platformBrightness ==
                 Brightness.dark
             ? true
             : false;
+    if (box.isEmpty) {
+      darkMode.value = system;
+    } else {
+      darkMode.value = box.get(_boxId)?.isDarkMode ?? system;
+    }
+
     super.onInit();
   }
 
-  void toggleDarkMode() {
+  Future<void> toggleDarkMode() async {
     darkMode.value = !darkMode.value;
+    final box = await Hive.openBox<HiveDarkMode>(_boxName);
+    box.put(_boxId, HiveDarkMode(isDarkMode: darkMode.value));
+    box.close();
   }
 }

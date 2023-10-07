@@ -31,8 +31,8 @@ class Settings extends StatelessWidget {
             Obx(
               () => SwitchListTile(
                 value: modeController.darkMode.value,
-                onChanged: (val) {
-                  modeController.toggleDarkMode();
+                onChanged: (val) async {
+                  await modeController.toggleDarkMode();
                 },
                 title: Text(
                   'Dark Mode',
@@ -106,7 +106,7 @@ class Settings extends StatelessWidget {
                 style: textTheme.titleLarge,
               ),
               subtitle: Text(
-                '1.0.0',
+                '1.1.0',
                 style: textTheme.bodyMedium,
               ),
             ),
@@ -116,7 +116,7 @@ class Settings extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Powerd by',
+                    'Power by',
                     style: textTheme.titleMedium,
                   ),
                   Image.asset(

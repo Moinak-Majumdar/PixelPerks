@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:circular_menu/circular_menu.dart';
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ import 'package:pixelperks/utils/get_smack.dart';
 import 'package:pixelperks/widget/center_error.dart';
 import 'package:pixelperks/widget/center_loader.dart';
 import 'package:pixelperks/widget/detailed_view.dart';
+// import 'package:pixelperks/utils/message.dart';
 
 final dio = Dio();
 
@@ -242,7 +244,12 @@ class Detailed extends StatelessWidget {
   }
 
   Future<bool> handlePermission() async {
-    const permission = Permission.storage;
+    AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
+    final version = int.parse(androidInfo.version.release) >= 11;
+
+    // managing the permission depends on android 11 or later.
+    final permission =
+        version ? Permission.manageExternalStorage : Permission.storage;
 
     if (await permission.isGranted) {
       return true;
@@ -309,6 +316,9 @@ class Detailed extends StatelessWidget {
         body: 'Failed to download this perks.',
         icon: Icons.error,
       );
+
+      // debug only.
+      // Get.to(() => MessageDebug(message: e.toString()));
       throw Exception(e);
     }
   }

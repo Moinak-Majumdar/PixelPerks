@@ -5,6 +5,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:pixelperks/controller/theme_controller.dart';
+import 'package:pixelperks/hive_dark_mode.dart';
 import 'package:pixelperks/hive_fav.dart';
 import 'package:pixelperks/screens/landing.dart';
 // import 'package:pixelperks/utils/splash_screen.dart';
@@ -16,6 +17,7 @@ void main() async {
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
   Hive.registerAdapter(HiveFavAdapter());
+  Hive.registerAdapter(HiveDarkModeAdapter());
   await dotenv.load(fileName: '.env');
 
   runApp(

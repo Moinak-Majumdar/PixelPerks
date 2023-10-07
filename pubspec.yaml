@@ -5,7 +5,7 @@ description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
 
-version: 1.0.0+1
+version: 1.1.0+1
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -32,6 +32,7 @@ dependencies:
   permission_handler: ^11.0.0
   flutter_cache_manager: ^3.3.1
   url_launcher: ^6.1.14
+  device_info_plus: ^9.0.3
   share_plus: ^7.1.0
   
 
@@ -46,6 +47,7 @@ dev_dependencies:
   hive_generator: ^2.0.1
   build_runner: ^2.4.6
 
+
 flutter_launcher_icons:
   android: true
   image_path: "assets/icon/icon.png"
@@ -57,7 +59,7 @@ flutter_native_splash:
   background_image: "assets/icon/splash-light.png"
   background_image_dark: "assets/icon/splash-dark.png"
   android: true
-  ios: true
+  ios: false
   web: false
 
 flutter:
