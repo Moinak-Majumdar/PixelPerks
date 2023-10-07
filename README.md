@@ -1,5 +1,7 @@
-![Screenshot 2023-10-08 003053](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/4abf84b9-e64e-4f68-8b7f-ac6686aaf857)
+![Screenshot 2023-10-08 003053](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/3f8644ef-11ee-4aad-98b2-1446a7d855f2)
+
 # Pixel Perks 
+
 Welcome to the ```Pixel Perks```, your go-to destination for stunning wallpapers powered by the ```Pixabay API```. This app combines the beauty of Flutter's sleek and responsive design with the vast library of high-quality images available on Pixabay, providing users with a seamless and visually appealing wallpaper experience. Whether you're looking to refresh your device's background or explore a world of captivating visuals, Pixel Perks has you covered. Explore, customize, and elevate your device's aesthetics with ease. Let's dive into a world of endless possibilities with the Pixel Perks!
 
 ### **Discover the Best Features of the Pixel Perks**
