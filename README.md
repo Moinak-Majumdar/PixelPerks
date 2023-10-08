@@ -53,4 +53,13 @@ Ready to leave your mark on the world of mobile wallpapers? Check out our [Contr
 
 🌟 Get Started Now by forking this repository.
 
+
+## Screen Shots 📱
+![pixelperks-2](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/c734a279-397a-4f91-9b20-0b099ee4f7ed)
+![pixelperks-3](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/4d196730-4ab2-4aa4-8c33-510384d3b351)
+![pixelperks-4](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/7f91b439-bb0d-4b3b-a2bc-56749b2c7dba)
+![pixelperks-5](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/a5d4f5a7-5a65-472c-bf8c-40c4a7820b40)
+![pixelperks-6](https://github.com/Moinak-Majumdar/PixelPerks/assets/99950805/bd265d34-6ac9-43b3-9674-2a193af8a32c)
+
+---
 ## Don't forget to Leave a ⭐ 
