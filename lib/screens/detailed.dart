@@ -1,25 +1,21 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:circular_menu/circular_menu.dart';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter_wallpaper_manager/flutter_wallpaper_manager.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:pixelperks/controller/detailed_controller.dart';
 import 'package:pixelperks/controller/theme_controller.dart';
 import 'package:pixelperks/model/full.dart';
-import 'package:pixelperks/utils/get_smack.dart';
+import 'package:pixelperks/utils/screen_operation.dart';
 import 'package:pixelperks/widget/center_error.dart';
 import 'package:pixelperks/widget/center_loader.dart';
 import 'package:pixelperks/widget/detailed_view.dart';
 // import 'package:pixelperks/utils/message.dart';
 
 final dio = Dio();
+final screenOperation = ScreenOperation();
 
 Future<FullImageServer> getDetailed(int id) async {
   try {
@@ -85,7 +81,9 @@ class Detailed extends StatelessWidget {
         items: [
           CircularMenuItem(
             onTap: () async {
-              await homeScreen(dc.items['$imageId']!.image);
+              await screenOperation.setAtHomeScreen(
+                url: dc.items['$imageId']!.image,
+              );
             },
             icon: Icons.home,
             boxShadow: const [],
@@ -94,7 +92,9 @@ class Detailed extends StatelessWidget {
           ),
           CircularMenuItem(
             onTap: () async {
-              await lockScreen(dc.items['$imageId']!.image);
+              await screenOperation.setAtLockScreen(
+                url: dc.items['$imageId']!.image,
+              );
             },
             icon: Icons.screen_lock_portrait,
             boxShadow: const [],
@@ -103,7 +103,9 @@ class Detailed extends StatelessWidget {
           ),
           CircularMenuItem(
             onTap: () async {
-              await homeAndLockScreen(dc.items['$imageId']!.image);
+              await screenOperation.setAtHomeAndLockScreen(
+                url: dc.items['$imageId']!.image,
+              );
             },
             icon: Icons.phone_android,
             boxShadow: const [],
@@ -123,11 +125,11 @@ class Detailed extends StatelessWidget {
           ),
           CircularMenuItem(
             onTap: () async {
-              final permission = await handlePermission();
+              final permission = await screenOperation.handlePermission();
 
               if (permission) {
-                handelDownload(
-                  imgName: dc.items[imageId.toString()]!.imgName,
+                await screenOperation.handelDownload(
+                  imgId: imageId.toString(),
                   url: dc.items[imageId.toString()]!.image,
                 );
               }
@@ -241,123 +243,5 @@ class Detailed extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  Future<bool> handlePermission() async {
-    AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
-    final version = int.parse(androidInfo.version.release) >= 11;
-
-    // managing the permission depends on android 11 or later.
-    final permission =
-        version ? Permission.manageExternalStorage : Permission.storage;
-
-    if (await permission.isGranted) {
-      return true;
-    }
-
-    if (await permission.isDenied) {
-      final request = await permission.request();
-
-      if (request.isGranted) {
-        return true;
-      } else {
-        GetSmack(
-          title: 'Permission required.',
-          body: 'Storage permission is needed to download images.',
-          icon: Icons.error,
-        );
-      }
-    }
-
-    if (await permission.isPermanentlyDenied) {
-      GetSmack(
-        title: 'Permission denied',
-        body:
-            'Sorry, storage permission is denied permanently, without permission you can not download images.',
-        icon: Icons.error,
-      );
-    }
-    return false;
-  }
-
-  Future<void> handelDownload(
-      {required String imgName, required String url}) async {
-    final response = await dio.get(
-      url,
-      options: Options(
-        responseType: ResponseType.bytes,
-        followRedirects: false,
-      ),
-    );
-
-    try {
-      final subDir = Directory(
-        '/storage/emulated/0/Pictures/PixelPerks',
-      ).existsSync()
-          ? Directory(
-              '/storage/emulated/0/Pictures/PixelPerks',
-            )
-          : await Directory(
-              '/storage/emulated/0/Pictures/PixelPerks',
-            ).create(recursive: true);
-
-      final File newFile =
-          await File("${subDir.path}/$imgName").create(recursive: true);
-      await newFile.writeAsBytes(response.data);
-      GetSmack(
-        title: 'Yeah!',
-        body:
-            'A new perks is downloaded. Location: Internal storage/Pictures/PixelPerks/$imgName',
-        icon: EvaIcons.download,
-      );
-    } catch (e) {
-      GetSmack(
-        title: 'Oops!',
-        body: 'Failed to download this perks.',
-        icon: Icons.error,
-      );
-
-      // debug only.
-      // Get.to(() => MessageDebug(message: e.toString()));
-      throw Exception(e);
-    }
-  }
-
-  Future<void> homeAndLockScreen(String url) async {
-    final file = await DefaultCacheManager().getSingleFile(url);
-    final res = await WallpaperManager.setWallpaperFromFile(file.path, 3);
-
-    if (res) {
-      GetSmack(
-        title: 'Awesome!',
-        body: 'A new Perks applied at your both home and lock screen.',
-        icon: Icons.phone_android,
-      );
-    }
-  }
-
-  Future<void> homeScreen(String url) async {
-    final file = await DefaultCacheManager().getSingleFile(url);
-
-    final res = await WallpaperManager.setWallpaperFromFile(file.path, 1);
-    if (res) {
-      GetSmack(
-        title: "Awesome!",
-        body: 'A new Perks is applied at your home screen.',
-        icon: Icons.home,
-      );
-    }
-  }
-
-  Future<void> lockScreen(String url) async {
-    final file = await DefaultCacheManager().getSingleFile(url);
-    final res = await WallpaperManager.setWallpaperFromFile(file.path, 2);
-    if (res) {
-      GetSmack(
-        title: "Awesome!",
-        body: 'A new Perks is applied at your lock screen.',
-        icon: Icons.screen_lock_portrait,
-      );
-    }
   }
 }

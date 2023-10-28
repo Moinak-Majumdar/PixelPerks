@@ -2,26 +2,30 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 
 class CenterError extends StatelessWidget {
-  const CenterError({super.key});
+  const CenterError(
+      {super.key, this.error = 'Oops! Failed to connect server.'});
+  const CenterError.custom({super.key, required this.error});
+
+  final String error;
 
   @override
   Widget build(context) {
-    return const Center(
+    return Center(
       child: Column(
         mainAxisSize: MainAxisSize.max,
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
+          const Icon(
             EvaIcons.alertTriangleOutline,
             color: Colors.red,
             size: 50,
           ),
-          SizedBox(height: 32),
+          const SizedBox(height: 32),
           Text(
-            'Oops! Failed to connect server.',
+            error,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
               fontFamily: 'PixelifySans',
               color: Colors.blueGrey,
               fontSize: 24,

@@ -8,6 +8,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pixelperks/screens/choice.dart';
+import 'package:pixelperks/screens/downloaded.dart';
 import 'package:pixelperks/screens/favorites.dart';
 import 'package:pixelperks/screens/settings.dart';
 import 'package:pixelperks/utils/get_smack.dart';
@@ -151,6 +152,25 @@ class LandingDrawer extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (_) => const Favorites(),
+                ),
+              );
+            },
+          ),
+          ListTile(
+            leading: Icon(
+              EvaIcons.download,
+              color: Theme.of(context).iconTheme.color,
+            ),
+            title: Text(
+              'Downloaded',
+              style: textTheme.headlineSmall,
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const Downloaded(),
                 ),
               );
             },
