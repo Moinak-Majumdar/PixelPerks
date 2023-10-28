@@ -158,7 +158,7 @@ class LandingDrawer extends StatelessWidget {
           ),
           ListTile(
             leading: Icon(
-              EvaIcons.download,
+              Icons.download_done_rounded,
               color: Theme.of(context).iconTheme.color,
             ),
             title: Text(

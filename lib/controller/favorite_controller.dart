@@ -66,4 +66,15 @@ class FavoriteController extends GetxController {
 
     return fav.isNotEmpty;
   }
+
+  Future<void> clearFavList() async {
+    final box = await Hive.openBox<HiveFav>(_boxName);
+    final data = box.values.toList();
+
+    if (data.isNotEmpty) {
+      await box.clear();
+    }
+
+    await box.close();
+  }
 }

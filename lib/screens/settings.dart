@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:get/get.dart';
+import 'package:pixelperks/controller/favorite_controller.dart';
 import 'package:pixelperks/controller/safe_content_controller.dart';
 import 'package:pixelperks/controller/theme_controller.dart';
 import 'package:pixelperks/utils/get_smack.dart';
@@ -14,6 +15,7 @@ class Settings extends StatelessWidget {
 
     final DarkModeController modeController = Get.put(DarkModeController());
     final SafeContentController scc = Get.put(SafeContentController());
+    final FavoriteController fc = Get.put(FavoriteController());
 
     return Scaffold(
       appBar: AppBar(
@@ -85,7 +87,8 @@ class Settings extends StatelessWidget {
                 'Clear Cache',
                 style: textTheme.titleLarge,
               ),
-              onTap: () {
+              onTap: () async {
+                await fc.clearFavList();
                 DefaultCacheManager().emptyCache().then(
                       (value) => GetSmack(
                         body: 'PixelPerks cache is cleared.',
