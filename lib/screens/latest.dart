@@ -21,7 +21,7 @@ class Latest extends StatelessWidget {
         }
 
         return FutureBuilder(
-          future: fetchInitial('initial'),
+          future: fetchInitial('latest'),
           builder: (ctx, snap) {
             if (snap.hasData) {
               Timer(const Duration(microseconds: 100), () {

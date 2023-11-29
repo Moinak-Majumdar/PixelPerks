@@ -21,7 +21,7 @@ class Trending extends StatelessWidget {
         }
 
         return FutureBuilder(
-          future: fetchInitial('latest'),
+          future: fetchInitial('trending'),
           builder: (ctx, snap) {
             if (snap.hasData) {
               Timer(const Duration(microseconds: 100), () {

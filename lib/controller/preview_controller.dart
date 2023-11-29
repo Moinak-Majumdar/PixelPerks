@@ -68,7 +68,7 @@ Future<PreviewImageServer> fetchInitial(String route) async {
 
   try {
     final res = await dio.get(
-      dotenv.env['SERVER_BASE']! + route,
+      'https://pixel-perks.vercel.app/$route',
       queryParameters: {"secret": dotenv.env['SECRET']},
     );
     return PreviewImageServer.fromJson(res.data, fromSafeSource: true);
@@ -84,7 +84,7 @@ Future<PreviewImageServer> fetchCategorized(
 
   try {
     final res = await dio.get(
-      dotenv.env['SERVER_CATEGORY']!,
+      'https://pixel-perks.vercel.app/categorized',
       queryParameters: {
         "secret": dotenv.env['SECRET'],
         "category": category,
