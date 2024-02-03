@@ -23,41 +23,43 @@ class Categorized extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Obx(
-          () {
-            // state cached :')
-            if (pc.server[item.endpoint]!.isNotEmpty) {
-              return PreviewGrid(
-                server: pc.server[item.endpoint]!,
-                isSafe: item.isSafe,
+      body: Scrollbar(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Obx(
+            () {
+              // state cached :')
+              if (pc.server[item.endpoint]!.isNotEmpty) {
+                return PreviewGrid(
+                  server: pc.server[item.endpoint]!,
+                  isSafe: item.isSafe,
+                );
+              }
+
+              return FutureBuilder(
+                future: fetchCategorized(
+                  category: item.category,
+                  isSafe: item.isSafe,
+                ),
+                builder: (ctx, snap) {
+                  if (snap.hasData) {
+                    Timer(const Duration(microseconds: 100), () {
+                      pc.addSateCache(snap.data!.images, item.endpoint);
+                    });
+
+                    // return PreviewGrid(server: snap.data!.images);
+                  }
+
+                  if (snap.hasError) {
+                    return const CenterError();
+                  }
+
+                  return const CenterLoader(
+                      msg: 'Each pixel with unique perks..');
+                },
               );
-            }
-
-            return FutureBuilder(
-              future: fetchCategorized(
-                category: item.category,
-                isSafe: item.isSafe,
-              ),
-              builder: (ctx, snap) {
-                if (snap.hasData) {
-                  Timer(const Duration(microseconds: 100), () {
-                    pc.addSateCache(snap.data!.images, item.endpoint);
-                  });
-
-                  // return PreviewGrid(server: snap.data!.images);
-                }
-
-                if (snap.hasError) {
-                  return const CenterError();
-                }
-
-                return const CenterLoader(
-                    msg: 'Each pixel with unique perks..');
-              },
-            );
-          },
+            },
+          ),
         ),
       ),
     );

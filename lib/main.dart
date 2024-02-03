@@ -4,9 +4,9 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:pixelperks/Hive/hive_dark_mode.dart';
+import 'package:pixelperks/Hive/hive_fav.dart';
 import 'package:pixelperks/controller/theme_controller.dart';
-import 'package:pixelperks/hive_dark_mode.dart';
-import 'package:pixelperks/hive_fav.dart';
 import 'package:pixelperks/screens/landing.dart';
 // import 'package:pixelperks/utils/splash_screen.dart';
 

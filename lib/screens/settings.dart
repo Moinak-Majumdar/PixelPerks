@@ -109,7 +109,7 @@ class Settings extends StatelessWidget {
                 style: textTheme.titleLarge,
               ),
               subtitle: Text(
-                '1.2.0',
+                '1.3.0',
                 style: textTheme.bodyMedium,
               ),
             ),

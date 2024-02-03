@@ -25,61 +25,63 @@ class Favorites extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Obx(
-          () {
-            final isDark = modeController.darkMode.value;
-            late List<PreviewImage> server;
+      body: Scrollbar(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Obx(
+            () {
+              final isDark = modeController.darkMode.value;
+              late List<PreviewImage> server;
 
-            if (scc.safeContent.value) {
-              final list = fc.favList
-                  .where((element) => element.fromSafeSource == true)
-                  .toList();
-              server = list;
-            } else {
-              server = fc.favList.toList();
-            }
+              if (scc.safeContent.value) {
+                final list = fc.favList
+                    .where((element) => element.fromSafeSource == true)
+                    .toList();
+                server = list;
+              } else {
+                server = fc.favList.toList();
+              }
 
-            if (server.isEmpty) {
-              return Center(
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      EvaIcons.searchOutline,
-                      size: 40,
-                      color: isDark ? Colors.amber : Colors.teal,
-                    ),
-                    const SizedBox(height: 20),
-                    DefaultTextStyle(
-                      style: TextStyle(
-                        fontFamily: 'PixelifySans',
-                        color: isDark ? Colors.white : Colors.black,
-                        fontSize: 24,
+              if (server.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        EvaIcons.searchOutline,
+                        size: 40,
+                        color: isDark ? Colors.amber : Colors.teal,
                       ),
-                      child: AnimatedTextKit(
-                        isRepeatingAnimation: false,
-                        animatedTexts: [
-                          TypewriterAnimatedText(
-                            'No images are added to favorite yet.',
-                            textAlign: TextAlign.center,
-                          ),
-                          TypewriterAnimatedText(
-                            'Double tap on any image to add as favorite.',
-                            textAlign: TextAlign.center,
-                          ),
-                        ],
+                      const SizedBox(height: 20),
+                      DefaultTextStyle(
+                        style: TextStyle(
+                          fontFamily: 'PixelifySans',
+                          color: isDark ? Colors.white : Colors.black,
+                          fontSize: 24,
+                        ),
+                        child: AnimatedTextKit(
+                          isRepeatingAnimation: false,
+                          animatedTexts: [
+                            TypewriterAnimatedText(
+                              'No images are added to favorite yet.',
+                              textAlign: TextAlign.center,
+                            ),
+                            TypewriterAnimatedText(
+                              'Double tap on any image to add as favorite.',
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              );
-            }
+                    ],
+                  ),
+                );
+              }
 
-            return PreviewGrid(server: server);
-          },
+              return PreviewGrid(server: server);
+            },
+          ),
         ),
       ),
     );

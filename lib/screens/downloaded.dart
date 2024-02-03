@@ -36,69 +36,74 @@ class Downloaded extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: FutureBuilder(
-        future: alreadyDownloaded(),
-        builder: (ctx, snap) {
-          if (snap.hasError) {
-            return const CenterError();
-          }
+      body: Scrollbar(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FutureBuilder(
+            future: alreadyDownloaded(),
+            builder: (ctx, snap) {
+              if (snap.hasError) {
+                return const CenterError();
+              }
 
-          if (snap.hasData) {
-            final data = snap.data;
+              if (snap.hasData) {
+                final data = snap.data;
 
-            if (data!.isEmpty) {
-              return const CenterError.custom(
-                error: 'Nothing found at app directory.',
-              );
-            }
+                if (data!.isEmpty) {
+                  return const CenterError.custom(
+                    error: 'Nothing found at app directory.',
+                  );
+                }
 
-            return GridView.custom(
-              gridDelegate: SliverQuiltedGridDelegate(
-                crossAxisCount: 4,
-                pattern: const [
-                  QuiltedGridTile(4, 2),
-                  QuiltedGridTile(3, 2),
-                  QuiltedGridTile(4, 2),
-                  QuiltedGridTile(4, 2),
-                ],
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                repeatPattern: QuiltedGridRepeatPattern.inverted,
-              ),
-              childrenDelegate: SliverChildBuilderDelegate(
-                (context, index) {
-                  final file = File(data[index].path);
-                  final fileName = file.path.split('/').last;
-                  final imgId = fileName.split('.').first;
+                return GridView.custom(
+                  gridDelegate: SliverQuiltedGridDelegate(
+                    crossAxisCount: 4,
+                    pattern: const [
+                      QuiltedGridTile(4, 2),
+                      QuiltedGridTile(3, 2),
+                      QuiltedGridTile(4, 2),
+                      QuiltedGridTile(4, 2),
+                    ],
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    repeatPattern: QuiltedGridRepeatPattern.inverted,
+                  ),
+                  childrenDelegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final file = File(data[index].path);
+                      final fileName = file.path.split('/').last;
+                      final imgId = fileName.split('.').first;
 
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => Detailed(
-                            imageId: int.parse(imgId),
-                            isSafe: false,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Detailed(
+                                imageId: int.parse(imgId),
+                                isSafe: false,
+                              ),
+                            ),
+                          );
+                        },
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.file(
+                            file,
+                            fit: BoxFit.cover,
                           ),
                         ),
                       );
                     },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.file(
-                        file,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  );
-                },
-                childCount: data.length,
-              ),
-            );
-          }
+                    childCount: data.length,
+                  ),
+                );
+              }
 
-          return const CenterLoader(msg: 'Reading directory ...');
-        },
+              return const CenterLoader(msg: 'Reading directory ...');
+            },
+          ),
+        ),
       ),
     );
   }

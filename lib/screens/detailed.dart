@@ -19,11 +19,13 @@ final screenOperation = ScreenOperation();
 
 Future<FullImageServer> getDetailed(int id) async {
   try {
-    final res = await dio
-        .get("https://pixel-perks.vercel.app/fullImage", queryParameters: {
-      "secret": dotenv.env['SECRET'],
-      "imageId": id,
-    });
+    final res = await dio.get(
+      "https://pixel-perks.vercel.app/fullImage",
+      queryParameters: {
+        "secret": dotenv.env['SECRET'],
+        "imageId": id,
+      },
+    );
 
     return FullImageServer.fromJson(res.data);
   } catch (e) {

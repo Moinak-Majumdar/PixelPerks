@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:pixelperks/hive_fav.dart';
+import 'package:pixelperks/Hive/hive_fav.dart';
 import 'package:pixelperks/model/preview.dart';
 
 const _boxName = 'HiveFavBox';

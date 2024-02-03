@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:pixelperks/hive_dark_mode.dart';
+import 'package:pixelperks/Hive/hive_dark_mode.dart';
 
 abstract class AppTheme {
   static final appFont = GoogleFonts.itimTextTheme();
@@ -23,6 +23,7 @@ abstract class AppTheme {
       scrolledUnderElevation: 0,
       color: Colors.transparent,
     ),
+    scaffoldBackgroundColor: Colors.grey[200],
     bottomNavigationBarTheme: const BottomNavigationBarThemeData().copyWith(
       backgroundColor: const Color.fromARGB(255, 245, 245, 245),
       elevation: 0,
@@ -31,11 +32,12 @@ abstract class AppTheme {
     iconTheme: const IconThemeData(
       color: Colors.teal,
     ),
-    snackBarTheme: const SnackBarThemeData().copyWith(
-      backgroundColor: Colors.white,
-    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData().copyWith(
       color: Colors.teal,
+    ),
+    scrollbarTheme: const ScrollbarThemeData().copyWith(
+      radius: const Radius.circular(16),
+      thumbColor: const MaterialStatePropertyAll(Colors.black38),
     ),
   );
 
@@ -69,11 +71,12 @@ abstract class AppTheme {
     dialogTheme: const DialogTheme().copyWith(
       backgroundColor: const Color.fromARGB(255, 20, 20, 20),
     ),
-    snackBarTheme: const SnackBarThemeData().copyWith(
-      backgroundColor: Colors.black,
-    ),
     progressIndicatorTheme: const ProgressIndicatorThemeData().copyWith(
       color: const Color.fromARGB(255, 34, 211, 238),
+    ),
+    scrollbarTheme: const ScrollbarThemeData().copyWith(
+      radius: const Radius.circular(16),
+      thumbColor: const MaterialStatePropertyAll(Colors.white30),
     ),
   );
 }

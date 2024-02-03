@@ -1,3 +1,4 @@
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,34 +17,7 @@ class Landing extends StatefulWidget {
 
 class _LandingState extends State<Landing> {
   String _pageTitle = 'Latest';
-  int _pageIndex = 0;
   Widget _body = const Latest();
-
-  void _changeScreen(int index) {
-    switch (index) {
-      case 0:
-        setState(() {
-          _pageIndex = 0;
-          _pageTitle = 'Latest';
-          _body = const Latest();
-        });
-        break;
-      case 1:
-        setState(() {
-          _pageIndex = 1;
-          _pageTitle = 'Editors Choice';
-          _body = const EditorsChoice();
-        });
-        break;
-      case 2:
-        setState(() {
-          _pageIndex = 2;
-          _pageTitle = 'Trending';
-          _body = const Trending();
-        });
-        break;
-    }
-  }
 
   @override
   Widget build(context) {
@@ -73,37 +47,52 @@ class _LandingState extends State<Landing> {
         ),
       ),
       drawer: const LandingDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: _body,
+      body: Scrollbar(
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 10),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: _body,
+          ),
+        ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _pageIndex,
-        onTap: _changeScreen,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        iconSize: 30,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(
-              EvaIcons.optionsOutline,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              EvaIcons.award,
-            ),
-            label: '',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(
-              EvaIcons.trendingUp,
-            ),
-            label: '',
-          )
-        ],
+      bottomNavigationBar: Obx(
+        () => CurvedNavigationBar(
+          backgroundColor:
+              modeController.darkMode.value ? Colors.black : Colors.grey[200]!,
+          color: modeController.darkMode.value ? Colors.white12 : Colors.white,
+          onTap: _changeScreen,
+          height: 47,
+          items: const [
+            Icon(EvaIcons.optionsOutline),
+            Icon(EvaIcons.award),
+            Icon(EvaIcons.trendingUp),
+          ],
+        ),
       ),
     );
+  }
+
+  void _changeScreen(int index) {
+    switch (index) {
+      case 0:
+        setState(() {
+          _pageTitle = 'Latest';
+          _body = const Latest();
+        });
+        break;
+      case 1:
+        setState(() {
+          _pageTitle = 'Editors Choice';
+          _body = const EditorsChoice();
+        });
+        break;
+      case 2:
+        setState(() {
+          _pageTitle = 'Trending';
+          _body = const Trending();
+        });
+        break;
+    }
   }
 }
