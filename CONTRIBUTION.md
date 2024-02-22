@@ -4,9 +4,17 @@ Welcome to the Pixel Perks open-source project! We appreciate your interest in c
 
 ## 1. Getting Started ▶️
 
-First things first, To contribute effectively to Pixel Perks, you will need to run the backend server locally on your development environment. Unfortunately, due to API limit constraints, we cannot provide access to the actual server for development purposes.
+First things first, To contribute effectively to Pixel Perks, you will need to setup your own ```.env``` file. To do so,
+- Create a file name ```.env``` in your root directory. Add the following fileds.
+ ```
+  SECRET = "YOUR PIXABAY API KEY"
+  EMAIL = "YOUR EMAIL ID"
 
-[Backend Sever Repository](https://github.com/Moinak-Majumdar/high-quality-image-server)
+  # PIXABY API DOCS : https://pixabay.com/api/docs/
+  ```
+- Start debugging.
+- You may check the <a href="https://github.com/Moinak-Majumdar/high-quality-image-server">backend server</a> made with ```express.js```.
+  
 
 
 
