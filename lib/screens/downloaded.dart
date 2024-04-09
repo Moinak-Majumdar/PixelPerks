@@ -9,7 +9,7 @@ import 'package:pixelperks/widget/center_loader.dart';
 
 final screenOperation = ScreenOperation();
 Future<List<FileSystemEntity>> alreadyDownloaded() async {
-  final permission = await screenOperation.handlePermission();
+  final permission = await screenOperation.handleStoragePermission();
 
   if (permission) {
     final exists =

@@ -40,7 +40,7 @@ const List<CategoryItem> categoryItems = [
   ),
   CategoryItem(
     isSafe: true,
-    category: 'fantasy',
+    category: 'fantasy landscape',
     endpoint: Endpoint.fantasy,
     title: 'Fantasy',
   ),
@@ -70,6 +70,12 @@ const List<CategoryItem> categoryItems = [
   ),
   CategoryItem(
     isSafe: true,
+    category: 'milky way',
+    endpoint: Endpoint.galaxy,
+    title: 'Galaxy',
+  ),
+  CategoryItem(
+    isSafe: true,
     category: 'hiking',
     endpoint: Endpoint.uhd,
     title: 'Hiking',
@@ -79,6 +85,12 @@ const List<CategoryItem> categoryItems = [
     category: 'lingerie',
     endpoint: Endpoint.lingerie,
     title: 'Lingerie',
+  ),
+  CategoryItem(
+    isSafe: true,
+    category: 'love couple',
+    endpoint: Endpoint.love,
+    title: 'Love',
   ),
   CategoryItem(
     isSafe: false,
@@ -94,7 +106,13 @@ const List<CategoryItem> categoryItems = [
   ),
   CategoryItem(
     isSafe: true,
-    category: 'ocean',
+    category: 'landscape',
+    endpoint: Endpoint.nature,
+    title: 'Nature',
+  ),
+  CategoryItem(
+    isSafe: true,
+    category: 'ocean waves',
     endpoint: Endpoint.ocean,
     title: 'Ocean',
   ),

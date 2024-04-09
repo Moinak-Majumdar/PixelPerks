@@ -28,6 +28,9 @@ enum Endpoint {
   hiking,
   river,
   monochrome,
+  nature,
+  galaxy,
+  love,
 }
 
 class PreviewController extends GetxController {
@@ -56,6 +59,9 @@ class PreviewController extends GetxController {
     Endpoint.hiking: [],
     Endpoint.river: [],
     Endpoint.monochrome: [],
+    Endpoint.nature: [],
+    Endpoint.galaxy: [],
+    Endpoint.love: [],
   }.obs;
 
   void addSateCache(List<PreviewImage> images, Endpoint e) {

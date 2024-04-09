@@ -12,7 +12,7 @@ import 'package:pixelperks/utils/get_smack.dart';
 class ScreenOperation {
   final _dio = Dio();
 
-  Future<bool> handlePermission() async {
+  Future<bool> handleStoragePermission() async {
     AndroidDeviceInfo androidInfo = await DeviceInfoPlugin().androidInfo;
     final version = int.parse(androidInfo.version.release) >= 11;
 
@@ -22,31 +22,18 @@ class ScreenOperation {
 
     if (await permission.isGranted) {
       return true;
-    }
-
-    if (await permission.isDenied) {
-      final request = await permission.request();
-
-      if (request.isGranted) {
-        return true;
-      } else {
-        GetSmack(
-          title: 'Permission required.',
-          body: 'Storage permission is needed to download images.',
-          icon: Icons.error,
-        );
-      }
-    }
-
-    if (await permission.isPermanentlyDenied) {
+    } else {
       GetSmack(
-        title: 'Permission denied',
-        body:
-            'Sorry, storage permission is denied permanently, without permission you can not download images.',
+        title: 'Permission required.',
+        body: 'Storage permission is needed to download images.',
         icon: Icons.error,
       );
+
+      if (await permission.isPermanentlyDenied) await openAppSettings();
+      if (await permission.isDenied) await permission.request();
+
+      return false;
     }
-    return false;
   }
 
   Future<void> handelDownload(

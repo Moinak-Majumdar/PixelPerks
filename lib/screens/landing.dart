@@ -62,7 +62,7 @@ class _LandingState extends State<Landing> {
               modeController.darkMode.value ? Colors.black : Colors.grey[200]!,
           color: modeController.darkMode.value ? Colors.white12 : Colors.white,
           onTap: _changeScreen,
-          height: 47,
+          height: 50,
           items: const [
             Icon(EvaIcons.optionsOutline),
             Icon(EvaIcons.award),

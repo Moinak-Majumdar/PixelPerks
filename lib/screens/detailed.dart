@@ -128,7 +128,8 @@ class Detailed extends StatelessWidget {
           ),
           CircularMenuItem(
             onTap: () async {
-              final permission = await screenOperation.handlePermission();
+              final permission =
+                  await screenOperation.handleStoragePermission();
 
               if (permission) {
                 await screenOperation.handelDownload(
