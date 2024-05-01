@@ -37,6 +37,26 @@ Elevate your device's aesthetics and explore a world of beautiful wallpapers wit
 ### **License**
 Pixel Perks is released under ```Apache-2.0 License```, check [LICENSE](https://github.com/Moinak-Majumdar/PixelPerks/blob/main/LICENSE) for more details.
 
+### ⚙️ **Project setup** ⚙️
+
+Before starting to work with PixelPerks, you need to follow these steps.
+
+- Create a file called ```.env``` at the root of your project working directory.
+
+- Open the ```.env``` file and add the following variables like this,
+
+```
+SECRET="YOUR_PIXABAY_SECRET_KEY"
+EMAIL="YOUR_EMAIL_ID"
+```
+
+- You can obtain your Pixabay api key [from here](https://pixabay.com/api/docs/). May need to signing if you don't have an account.
+
+- You may check the backend server [repository](https://github.com/Moinak-Majumdar/high-quality-image-server), made with express.js
+
+- Follow the api [documentation](https://github.com/Moinak-Majumdar/high-quality-image-server/blob/main/DOCS.md) for more information. 
+
+
 ### 🎨 **Welcome to Pixel Perks - Unleash Your Creativity!** 🎨
 
 Are you passionate about Flutter and mobile app development? Do you have a flair for design, a knack for coding, or simply a love for beautiful wallpapers? Join us in shaping the future of mobile wallpapers with Pixel Perks, the open-source Flutter wallpaper app!

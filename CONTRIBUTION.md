@@ -4,11 +4,22 @@ Welcome to the Pixel Perks open-source project! We appreciate your interest in c
 
 ## 1. Getting Started ▶️
 
-First things first, To contribute effectively to Pixel Perks, you will need to run the backend server locally on your development environment. Unfortunately, due to API limit constraints, we cannot provide access to the actual server for development purposes.
+First things first, To contribute effectively to PixelPerks, you need to follow these steps.
 
-[Backend Sever Repository](https://github.com/Moinak-Majumdar/high-quality-image-server)
+- Create a file called ```.env``` at the root of your project working directory.
 
+- Open the ```.env``` file and add the following variables like this,
 
+```
+SECRET="YOUR_PIXABAY_SECRET_KEY"
+EMAIL="YOUR_EMAIL_ID"
+```
+
+- You can obtain your Pixabay api key [from here](https://pixabay.com/api/docs/). May need to signing if you don't have an account.
+
+- You may check the backend server [repository](https://github.com/Moinak-Majumdar/high-quality-image-server), made with express.js
+
+- Follow the api [documentation](https://github.com/Moinak-Majumdar/high-quality-image-server/blob/main/DOCS.md) for more information. 
 
 ## 2. How to Contribute
 
