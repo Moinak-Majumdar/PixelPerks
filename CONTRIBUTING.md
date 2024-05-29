@@ -15,7 +15,7 @@ SECRET="YOUR_PIXABAY_SECRET_KEY"
 EMAIL="YOUR_EMAIL_ID"
 ```
 
-- You can obtain your Pixabay api key [from here](https://pixabay.com/api/docs/). May need to signing if you don't have an account.
+- You can obtain your Pixabay api key [from here](https://pixabay.com/api/docs/). May need to sign in if you don't have an account.
 
 - You may check the backend server [repository](https://github.com/Moinak-Majumdar/high-quality-image-server), made with express.js
 
